@@ -1,6 +1,6 @@
-22:22:05 **** Incremental Build of configuration Debug for project sematimer ****
+23:40:56 **** Build of configuration Debug for project sematimer ****
 make all 
-Cannot run program "make": Unknown reason
+make: Für das Ziel »all« ist nichts zu tun.
 
-22:22:05 Build Finished (took 17ms)
+23:40:56 Build Finished (took 68ms)
 

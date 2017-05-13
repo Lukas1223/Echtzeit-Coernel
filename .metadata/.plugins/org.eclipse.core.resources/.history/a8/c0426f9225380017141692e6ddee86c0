@@ -126,7 +126,7 @@ int main() {
 	// Warte auf Tastendruck
 	printf("Press Enter to finish\n");
 	char c = getchar();
-	//c = c;
+	c = c;
 	// Aufräumen
 	cleanup(); 
 	return 0;

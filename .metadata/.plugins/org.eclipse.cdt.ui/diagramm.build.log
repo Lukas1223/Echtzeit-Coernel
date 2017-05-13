@@ -1,6 +1,6 @@
-22:22:04 **** Incremental Build of configuration Debug for project diagramm ****
+23:42:23 **** Incremental Build of configuration Debug for project diagramm ****
 make all 
-Cannot run program "make": Unknown reason
+make: Für das Ziel »all« ist nichts zu tun.
 
-22:22:04 Build Finished (took 11ms)
+23:42:23 Build Finished (took 74ms)
 

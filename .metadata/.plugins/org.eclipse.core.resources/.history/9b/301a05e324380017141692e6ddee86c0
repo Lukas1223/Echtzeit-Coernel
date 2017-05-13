@@ -23,7 +23,7 @@ const int bufferSize = 4;
 pthread_t hTaskA;	// Erzeuger
 pthread_t hTaskB; 	// Verbraucher
 sem_t semaphore;	// Synchronisation über Puffer
-
+s
 
 /* function guarded_nanosleep
  * @brief	Warte eine definierte Zeit
@@ -126,7 +126,7 @@ int main() {
 	// Warte auf Tastendruck
 	printf("Press Enter to finish\n");
 	char c = getchar();
-	//c = c;
+	c = c;
 	// Aufräumen
 	cleanup(); 
 	return 0;

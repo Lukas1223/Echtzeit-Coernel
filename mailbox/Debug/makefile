@@ -40,10 +40,10 @@ endif
 all: mailbox
 
 dependents:
-	-cd /home/mrt/Downloads/Workspace_Echtzeitsimulation/diagramm/Debug && $(MAKE) all
+	-cd /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug && $(MAKE) clean all
 
 # Tool invocations
-mailbox: $(OBJS) $(USER_OBJS) /home/mrt/Downloads/Workspace_Echtzeitsimulation/diagramm/Debug/diagramm
+mailbox: $(OBJS) $(USER_OBJS) /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagramm
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
 	g++  -o "mailbox" $(OBJS) $(USER_OBJS) $(LIBS)
@@ -57,6 +57,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
-/home/mrt/Downloads/Workspace_Echtzeitsimulation/diagramm/Debug/diagramm:
+/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagramm:
 
 -include ../makefile.targets
