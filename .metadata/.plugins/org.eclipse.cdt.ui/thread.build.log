@@ -1,0 +1,6 @@
+22:22:05 **** Incremental Build of configuration Debug for project thread ****
+make all 
+Cannot run program "make": Unknown reason
+
+22:22:05 Build Finished (took 16ms)
+

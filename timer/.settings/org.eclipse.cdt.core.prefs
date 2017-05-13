@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/$ORACLE_HOME/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/$ORACLE_HOME/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/$ORACLE_HOME/value=
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/PATH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/PATH/value=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/usr/games\:/usr/local/games
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.debug.627930711/appendContributed=true

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="false" key="LexicalSortingAction.sort"/>
+	<section name="org.eclipse.cdt.internal.ui.text.QuickOutline">
+		<item value="false" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_USE_PERSISTED_BOUNDS"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+</section>

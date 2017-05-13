@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="de.fh_zwickau.asmplugin.launch">
+<stringAttribute key="launch.arguments" value=""/>
+<stringAttribute key="launch.file" value="art2/aufgabe.cpp"/>
+<stringAttribute key="launch.working.directory" value="/home/student/Desktop/workspace-MRT2-ART2/art2"/>
+</launchConfiguration>
