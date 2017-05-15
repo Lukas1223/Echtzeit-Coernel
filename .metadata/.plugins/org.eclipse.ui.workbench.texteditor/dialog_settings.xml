@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="315" key="DIALOG_WIDTH"/>
-		<item value="53" key="DIALOG_Y_ORIGIN"/>
-		<item value="427" key="DIALOG_HEIGHT"/>
-		<item value="462" key="DIALOG_X_ORIGIN"/>
-		<item value="1|Sans|10.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item value="false" key="wrap"/>
 		<item value="false" key="isRegEx"/>
+		<item value="ErzeugerA" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
+		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
-		<item value="box" key="selection"/>
 		<list key="findhistory">
+			<item value="Erzeuger"/>
+			<item value="timespec"/>
+			<item value="tsErzeuger"/>
+			<item value="erzeuger_puffer"/>
+			<item value="erzeuger_dauer"/>
 			<item value="box"/>
 			<item value="bas"/>
-			<item value="erzeuger_puffer"/>
 			<item value="buffer"/>
-			<item value="mbGName"/>
-			<item value="hMailG"/>
-			<item value="grafikMailbox"/>
-			<item value="hTaskG"/>
 		</list>
 		<list key="replacehistory">
+			<item value="ErzeugerA"/>
+			<item value="tsErzeugerA"/>
+			<item value="erzeugerA_puffer"/>
+			<item value="erzeugerA_dauer"/>
 			<item value="gMbName"/>
 			<item value="grafikMailbox"/>
 			<item value=""/>
 			<item value="grafikTask"/>
-			<item value="verbraucherTask"/>
-			<item value="erzeugerPufferSemaphore"/>
-			<item value="erzeugerTask"/>
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="326" key="DIALOG_WIDTH"/>
+		<item value="1|Sans|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="443" key="DIALOG_HEIGHT"/>
+		<item value="126" key="DIALOG_Y_ORIGIN"/>
+		<item value="808" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

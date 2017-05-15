@@ -26,7 +26,6 @@ extern const color blue;
 extern const color cyan; 
 extern const color green; 
 extern const color yellow; 
-extern const color purple;
 
 
 /* Initialize a screen for drawing */

@@ -13,7 +13,7 @@ const color blue  = { 0, 0, 255 };
 const color cyan  = { 0, 255, 255 }; 
 const color green = { 0, 255, 0 };
 const color yellow= { 255,255, 0 }; 
-const color purple= {124, 0, 83};
+const color purple= { 87, 45, 123};
 
 /* struct d_param
  * @brief structure that holds relevant data for diagram scaling

@@ -151,14 +151,14 @@ void cleanup() {
 */
 void * ErzeugerA(void *arg) {
 	struct timespec delay = *(struct timespec *)arg;
-	mqd_t mbG = mq_open(gMbName, O_RDWR);
+	mqd_t mbG_A = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
 		//Produktionsdauer abwarten
 		guarded_nanosleep(delay);
 		// std::cout << "part produced..." << std::endl << std::flush;
 		// Erzeugungsmeldung an Grafik senden
-		mq_send(mbG, (char *) new Event(Produziert_A), sizeof(Event), 1);
+		mq_send(mbG_A, (char *) new Event(Produziert_A), sizeof(Event), 1);
 		// Produkt in Puffer schieben wenn Platz frei, sonst warten
 		sem_wait(&erzeugerPufferSemaphore);
 	}
@@ -166,25 +166,25 @@ void * ErzeugerA(void *arg) {
 }
 void * ErzeugerB(void *arg) {
 	struct timespec delay = *(struct timespec *)arg;
-	mqd_t mbG = mq_open(gMbName, O_RDWR);
+	mqd_t mbG_B = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
 		guarded_nanosleep(delay);
 		// std::cout << "part produced..." << std::endl << std::flush;
-		mq_send(mbG, (char *) new Event(Produziert_B), sizeof(Event), 1);
+		mq_send(mbG_B, (char *) new Event(Produziert_B), sizeof(Event), 1);
 		sem_wait(&erzeugerPufferSemaphore);
 	}
 	return NULL;
 }
 void * ErzeugerC(void *arg) {
 	struct timespec delay = *(struct timespec *)arg;
-	mqd_t mbG = mq_open(gMbName, O_RDWR);
+	mqd_t mbG_C = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
 		guarded_nanosleep(delay);
 		// std::cout << "part produced..." << std::endl << std::flush;
 		// Erzeugungsmeldung an Grafik senden
-		mq_send(mbG, (char *) new Event(Produziert_C), sizeof(Event), 1);
+		mq_send(mbG_C, (char *) new Event(Produziert_C), sizeof(Event), 1);
 		sem_wait(&erzeugerPufferSemaphore);
 	}
 	return NULL;
@@ -249,19 +249,19 @@ void * Grafik(void *arg) {
 				// Anzahl der Produkte
 				sprintf(text, "Anzahl der Produkte von A: %d", pCounterA);
 				// vorher den Bereich löschen
-				boxRGBA(screen, 100, 40, 400, 49, 0, 0, 0, 255);
+				boxRGBA(screen, 100, 40, 400, 49, 0, 0, 255, 255);
 				// Textausgabe
-				stringRGBA(screen, 100, 40, text, 0, 0, 255, 255);
+				stringRGBA(screen, 100, 40, text, 0, 255, 255, 255);
 				break;
 			case Produziert_B:
 				// Zeichne Stufe für die produzierten Stücke von B
 				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, pCounterB,
-						purple);
+						yellow);
 				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, ++pCounterB,
-						purple);
+						yellow);
 				sprintf(text,  "Anzahl der Produkte von B: %d", pCounterB);
 				boxRGBA(screen, 100, 50, 400, 59, 0, 0, 0, 255);
-				stringRGBA(screen, 100, 50, text, 124, 0,83, 255);
+				stringRGBA(screen, 100, 50, text, 255, 255,0, 255);
 				break;
 			case Produziert_C:
 				// Zeichne Stufe für die produzierten Stücke von C
@@ -286,9 +286,9 @@ void * Grafik(void *arg) {
 			case Undefiniert:
 				// Zeichne Linie weiter
 				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100, pCounterA,
-						blue);
+						cyan);
 				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, pCounterB,
-						purple);
+						yellow);
 				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100, pCounterC,
 						green);
 				DrawLine(&screen, 1, (double) evt.getRTmsec() / 100, vCounter,
