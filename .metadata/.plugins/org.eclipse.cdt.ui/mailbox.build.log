@@ -1,4 +1,4 @@
-23:40:55 **** Build of configuration Debug for project mailbox ****
+21:22:12 **** Incremental Build of configuration Debug for project mailbox ****
 make all 
 Building target: mailbox
 Invoking: GCC C++ Linker
@@ -6,5 +6,5 @@ g++  -o "mailbox"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_n
 Finished building target: mailbox
  
 
-23:40:55 Build Finished (took 280ms)
+21:22:12 Build Finished (took 188ms)
 

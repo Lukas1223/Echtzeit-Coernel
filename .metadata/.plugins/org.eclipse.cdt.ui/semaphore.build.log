@@ -1,4 +1,4 @@
-23:46:08 **** Incremental Build of configuration Debug for project semaphore ****
+19:12:54 **** Incremental Build of configuration Debug for project semaphore ****
 make all 
 Building file: ../semaphore.cpp
 Invoking: GCC C++ Compiler
@@ -15,5 +15,5 @@ g++  -o "semaphore"  ./semaphore.o   -lSDL -lSDL_gfx -lrt -lpthread
 Finished building target: semaphore
  
 
-23:46:09 Build Finished (took 170ms)
+19:12:55 Build Finished (took 334ms)
 

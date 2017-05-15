@@ -27,6 +27,7 @@ extern const color cyan;
 extern const color green; 
 extern const color yellow; 
 
+
 /* Initialize a screen for drawing */
 int InitScreen(SDL_Surface** screen, const char* const title);
 /* Clear entire screen */
