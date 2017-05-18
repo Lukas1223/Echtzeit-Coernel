@@ -1,19 +1,6 @@
-19:12:54 **** Incremental Build of configuration Debug for project semaphore ****
+15:41:28 **** Incremental Build of configuration Debug for project semaphore ****
 make all 
-Building file: ../semaphore.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"semaphore.d" -MT"semaphore.o" -o "semaphore.o" "../semaphore.cpp"
-../semaphore.cpp: In function ‘int main()’:
-../semaphore.cpp:128:7: warning: unused variable ‘c’ [-Wunused-variable]
-  char c = getchar();
-       ^
-Finished building: ../semaphore.cpp
- 
-Building target: semaphore
-Invoking: GCC C++ Linker
-g++  -o "semaphore"  ./semaphore.o   -lSDL -lSDL_gfx -lrt -lpthread
-Finished building target: semaphore
- 
+make: Für das Ziel »all« ist nichts zu tun.
 
-19:12:55 Build Finished (took 334ms)
+15:41:28 Build Finished (took 86ms)
 

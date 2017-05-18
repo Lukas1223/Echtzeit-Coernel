@@ -28,7 +28,7 @@ int main() {
 	int i, status;
 	pthread_t thread[noThreads];
 
-	// initialisiere seamphore
+	// initialisiere semaphore
 	sem_init(&semaphore, 0, 0);
 
 	// erzeuge threads, die auf die semaphore warten

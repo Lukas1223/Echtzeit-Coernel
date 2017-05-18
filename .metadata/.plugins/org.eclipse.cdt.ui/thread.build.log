@@ -1,6 +1,6 @@
-19:18:06 **** Incremental Build of configuration Debug for project thread ****
+17:49:12 **** Incremental Build of configuration Debug for project thread ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
 
-19:18:06 Build Finished (took 67ms)
+17:49:12 Build Finished (took 84ms)
 

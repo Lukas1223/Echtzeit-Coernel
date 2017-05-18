@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ErzeugerA" key="selection"/>
+		<item value="Puffer" key="selection"/>
 		<item value="false" key="casesensitive"/>
-		<item value="false" key="incremental"/>
-		<item value="false" key="wrap"/>
+		<item value="true" key="incremental"/>
+		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="puffer"/>
+			<item value="if("/>
+			<item value="if"/>
+			<item value="erzeugerC_puffer"/>
 			<item value="Erzeuger"/>
 			<item value="timespec"/>
 			<item value="tsErzeuger"/>
 			<item value="erzeuger_puffer"/>
-			<item value="erzeuger_dauer"/>
-			<item value="box"/>
-			<item value="bas"/>
-			<item value="buffer"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ErzeugerA"/>

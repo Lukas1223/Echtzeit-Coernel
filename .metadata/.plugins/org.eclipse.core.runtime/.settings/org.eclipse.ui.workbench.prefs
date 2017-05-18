@@ -2,6 +2,7 @@
 ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.cdt.ui.presentation\tTorg.eclipse.cdt.ui.CEditor.presentation
 ColorsAndFontsPreferencePage.selectedElement=Forg.eclipse.cdt.ui.buildconsole.ConsoleFont
 REMOTE_COMMANDS_VIEW_FONT=1|Monospace|12.0|0|GTK|1|;
+UIActivities.org.eclipse.cdt.debug.dsfgdbActivity=true
 eclipse.preferences.version=1
 org.eclipse.cdt.debug.ui.ModulesDetailPaneFont=1|Monospace|12.0|0|GTK|1|;
 org.eclipse.cdt.internal.ui.compare.AsmMergeViewer=1|Monospace|12.0|0|GTK|1|;

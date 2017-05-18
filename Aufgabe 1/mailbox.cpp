@@ -27,15 +27,22 @@ const int erzeugerB_dauer_sec = 5; // Dauer Teileerzeugung in sec
 const int erzeugerB_dauer_nsec = 0; // + Dauer Teileerzeugung in nsec
 const int erzeugerC_dauer_sec = 7; // Dauer Teileerzeugung in sec
 const int erzeugerC_dauer_nsec = 0; // + Dauer Teileerzeugung in nsec
-const int erzeugerA_puffer = 1; // kein Puffer
-const int erzeugerB_puffer = 1; // kein Puffer
-const int erzeugerC_puffer = 1; // kein Puffer
+const int erzeugerA_puffer = 0; // kein Puffer
+const int erzeugerB_puffer = 0; // kein Puffer
+const int erzeugerC_puffer = 0; // kein Puffer
+const int verbraucher_puffer = 3; // drei verschiedene teile am Verbraucher erlaubt
 const int verbraucher_dauer_sec = 3; // Dauer Verpackung in sec
 const int verbraucher_dauer_nsec = 0; // + Dauer Verpackung in nsec
+int inLeitungA = 0;
+int inLeitungB = 0;
+int inLeitungC = 0;
 
 /* Task Variablen */
 pthread_t erzeugerTask; // Erzeugertask
 sem_t erzeugerPufferSemaphore; // Produktzwischenpuffer als erzeugerPufferSemaphore
+sem_t erzeuger_APuffer;
+sem_t erzeuger_BPuffer;
+sem_t erzeuger_CPuffer;
 pthread_t verbraucherTask; // Verbrauchertask
 
 pthread_t grafikTask; // Zeichenthread
@@ -53,11 +60,7 @@ SDL_Surface *screen; //Window-Handler
 
 /* Eine Klasse für zeitbasierte Ereignisse */
 enum eventType {
-	Produziert_A,
-	Produziert_B,
-	Produziert_C,
-	Verpackt,
-	Undefiniert
+	Produziert_A, Produziert_B, Produziert_C, Verpackt, Undefiniert
 };
 
 class Event {
@@ -123,69 +126,89 @@ void cleanup() {
  * Diese Funktion wird im Erzeugertask abgearbeitet
  */
 /*void * Erzeuger(void *argument) {
-	struct argA = *(struct argument_A *) argument;
-	struct timespec delay = argA->tsErzeugerA;
-	mqd_t mbG = mq_open(gMbName, O_RDWR);
+ struct argA = *(struct argument_A *) argument;
+ struct timespec delay = argA->tsErzeugerA;
+ mqd_t mbG = mq_open(gMbName, O_RDWR);
 
-	for (;;) {
-		//Produktionsdauer abwarten
-		guarded_nanosleep(delay);
-		// std::cout << "part produced..." << std::endl << std::flush;
-		// Erzeugungsmeldung an Grafik senden
-		switch (type)
-		case Produziert_A:
-		mq_send(mbG, (char *) new Event(Produziert_A), sizeof(Event), 1);
-		break;
-		case Produziert_B:
-		mq_send(mbG, (char *) new Event(Produziert_B), sizeof(Event), 1);
-		break;
-		case Produziert_C:
-		mq_send(mbG, (char *) new Event(Produziert_C), sizeof(Event), 1);
-		break;
+ for (;;) {
+ //Produktionsdauer abwarten
+ guarded_nanosleep(delay);
+ // std::cout << "part produced..." << std::endl << std::flush;
+ // Erzeugungsmeldung an Grafik senden
+ switch (type)
+ case Produziert_A:
+ mq_send(mbG, (char *) new Event(Produziert_A), sizeof(Event), 1);
+ break;
+ case Produziert_B:
+ mq_send(mbG, (char *) new Event(Produziert_B), sizeof(Event), 1);
+ break;
+ case Produziert_C:
+ mq_send(mbG, (char *) new Event(Produziert_C), sizeof(Event), 1);
+ break;
 
-		// Produkt in Puffer schieben wenn Platz frei, sonst warten
-		sem_wait(&erzeugerPufferSemaphore);
-	}
-	return NULL;
-}
-*/
+ // Produkt in Puffer schieben wenn Platz frei, sonst warten
+ sem_wait(&erzeugerPufferSemaphore);
+ }
+ return NULL;
+ }
+ */
 void * ErzeugerA(void *arg) {
-	struct timespec delay = *(struct timespec *)arg;
+	struct timespec delay = *(struct timespec *) arg;
 	mqd_t mbG = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
+		if (inLeitungA > 0) {
+			sem_wait(&erzeuger_BPuffer);
+			inLeitungA = 0;
+		}
 		//Produktionsdauer abwarten
 		guarded_nanosleep(delay);
 		// std::cout << "part produced..." << std::endl << std::flush;
 		// Erzeugungsmeldung an Grafik senden
 		mq_send(mbG, (char *) new Event(Produziert_A), sizeof(Event), 1);
 		// Produkt in Puffer schieben wenn Platz frei, sonst warten
+		inLeitungA = 1;
 		sem_wait(&erzeugerPufferSemaphore);
+
 	}
 	return NULL;
 }
 void * ErzeugerB(void *arg) {
-	struct timespec delay = *(struct timespec *)arg;
+	struct timespec delay = *(struct timespec *) arg;
 	mqd_t mbG = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
+		if (inLeitungB > 0) {
+			sem_wait(&erzeuger_BPuffer);
+			inLeitungB = 0;
+		}
 		guarded_nanosleep(delay);
 		// std::cout << "part produced..." << std::endl << std::flush;
 		mq_send(mbG, (char *) new Event(Produziert_B), sizeof(Event), 1);
+		inLeitungB = 1;
 		sem_wait(&erzeugerPufferSemaphore);
+
+
 	}
 	return NULL;
 }
 void * ErzeugerC(void *arg) {
-	struct timespec delay = *(struct timespec *)arg;
+	struct timespec delay = *(struct timespec *) arg;
 	mqd_t mbG = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
+		if (inLeitungC > 0) {
+			sem_wait(&erzeuger_CPuffer);
+			inLeitungC = 0;
+		}
 		guarded_nanosleep(delay);
 		// std::cout << "part produced..." << std::endl << std::flush;
 		// Erzeugungsmeldung an Grafik senden
 		mq_send(mbG, (char *) new Event(Produziert_C), sizeof(Event), 1);
+		inLeitungC = 1;
 		sem_wait(&erzeugerPufferSemaphore);
+
+
 	}
 	return NULL;
 }
@@ -202,11 +225,29 @@ void * Verbraucher(void *arg) {
 
 	while (1) {
 		int sval;
+		int svalA;
+		int svalB;
+		int svalC;
+
 		// Teste, ob es etwas zum Verpacken gibt 
+
 		sem_getvalue(&erzeugerPufferSemaphore, &sval);
-		if (sval != erzeugerA_puffer) { // Alle Plätze sind frei
-			// Hole das Teil aus dem Puffer
+		if (sval != verbraucher_puffer) { // Alle Plätze sind frei
+
+			// Hole das letzte Teil aus dem Puffer
 			sem_post(&erzeugerPufferSemaphore);
+			if (sval != erzeugerA_puffer)
+			{inLeitungA=0;
+			sem_post(&erzeuger_APuffer);}
+			sem_getvalue(&erzeuger_BPuffer, &svalB);
+			if (sval != erzeugerB_puffer)
+			{inLeitungB=0;
+			sem_post(&erzeuger_BPuffer);}
+			sem_getvalue(&erzeuger_CPuffer, &svalC);
+			if (sval != erzeugerC_puffer)
+			{inLeitungC=0;
+			sem_post(&erzeuger_CPuffer);}
+
 			// und verpacke
 			guarded_nanosleep(delay);
 			// std::cout << "part wrapped..." << std::endl << std::flush;
@@ -244,8 +285,8 @@ void * Grafik(void *arg) {
 				// Zeichne Stufe für die produzierten Stücke von A
 				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100, pCounterA,
 						blue);
-				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100, ++pCounterA,
-						blue);
+				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100,
+						++pCounterA, blue);
 				// Anzahl der Produkte
 				sprintf(text, "Anzahl der Produkte von A: %d", pCounterA);
 				// vorher den Bereich löschen
@@ -257,18 +298,18 @@ void * Grafik(void *arg) {
 				// Zeichne Stufe für die produzierten Stücke von B
 				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, pCounterB,
 						purple);
-				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, ++pCounterB,
-						purple);
-				sprintf(text,  "Anzahl der Produkte von B: %d", pCounterB);
+				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100,
+						++pCounterB, purple);
+				sprintf(text, "Anzahl der Produkte von B: %d", pCounterB);
 				boxRGBA(screen, 100, 50, 400, 59, 0, 0, 0, 255);
-				stringRGBA(screen, 100, 50, text, 124, 0,83, 255);
+				stringRGBA(screen, 100, 50, text, 124, 0, 83, 255);
 				break;
 			case Produziert_C:
 				// Zeichne Stufe für die produzierten Stücke von C
 				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100, pCounterC,
 						green);
-				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100, ++pCounterC,
-						green);
+				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100,
+						++pCounterC, green);
 				sprintf(text, "Anzahl der Produkte von C: %d", pCounterC);
 				boxRGBA(screen, 100, 60, 400, 69, 0, 0, 0, 255);
 				stringRGBA(screen, 100, 60, text, 0, 255, 0, 255);
@@ -336,19 +377,20 @@ int main() {
 	typedef struct {
 		timespec tsErzeugerB;
 		eventType Produziert_B;
-		} argument_B;
+	} argument_B;
 
 	typedef struct {
 		timespec tsErzeugerC;
 		eventType Produziert_C;
-		} argument_C;
+	} argument_C;
 
+	// Initialisiere erzeugerPufferSemaphoren fuer den Verbraucherpuffer
+	sem_init(&erzeugerPufferSemaphore, 0, verbraucher_puffer);
 
-
-	// Initialisiere erzeugerPufferSemaphoren fuer den Erzeugerpuffer
-	sem_init(&erzeugerPufferSemaphore, 0, erzeugerA_puffer);
-	sem_init(&erzeugerPufferSemaphore, 0, erzeugerB_puffer);
-	sem_init(&erzeugerPufferSemaphore, 0, erzeugerC_puffer);
+	//Erzeugerpuffer für die drei Produktionsstrassen
+	sem_init(&erzeuger_APuffer, 0, erzeugerA_puffer);
+	sem_init(&erzeuger_BPuffer, 0, erzeugerB_puffer);
+	sem_init(&erzeuger_CPuffer, 0, erzeugerC_puffer);
 
 	// Die mailbox soll bis zu 10 Elemente vom Typ Event aufnehmen können 
 	struct mq_attr attr;
