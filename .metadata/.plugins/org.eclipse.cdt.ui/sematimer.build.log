@@ -1,4 +1,4 @@
-15:44:52 **** Build of configuration Debug for project sematimer ****
+21:06:36 **** Build of configuration Debug for project sematimer ****
 make all 
 Building file: ../sematimer.cpp
 Invoking: GCC C++ Compiler
@@ -11,5 +11,5 @@ g++  -o "sematimer"  ./sematimer.o   -lpthread -lrt
 Finished building target: sematimer
  
 
-15:44:53 Build Finished (took 284ms)
+21:06:36 Build Finished (took 310ms)
 

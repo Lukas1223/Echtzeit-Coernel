@@ -1,9 +1,9 @@
-src/mailbox.o: ../src/mailbox.cpp \
+Aufgabe\ 1/mailbox.d: ../Aufgabe\ 1/mailbox.cpp \
  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/diagram.h \
- ../src/errors.h ../src/util.h
+ ../Aufgabe\ 1/errors.h ../Aufgabe\ 1/util.h
 
 /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/diagram.h:
 
-../src/errors.h:
+../Aufgabe\ 1/errors.h:
 
-../src/util.h:
+../Aufgabe\ 1/util.h:

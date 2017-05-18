@@ -1,6 +1,6 @@
-15:41:28 **** Incremental Build of configuration Debug for project semaphore ****
+21:06:36 **** Build of configuration Debug for project semaphore ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
 
-15:41:28 Build Finished (took 86ms)
+21:06:36 Build Finished (took 94ms)
 
