@@ -1,0 +1,13 @@
+21:58:42 **** Incremental Build of configuration Debug for project art2-v2.1 ****
+make all 
+Building file: ../Aufgabe 1/mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Aufgabe 1/mailbox.d" -MT"Aufgabe\ 1/mailbox.d" -o "Aufgabe 1/mailbox.o" "../Aufgabe 1/mailbox.cpp"
+../Aufgabe 1/mailbox.cpp:20:38: fatal error: diagram.h: Datei oder Verzeichnis nicht gefunden
+ #include "diagram.h"  // SDL, Draw...
+                                      ^
+compilation terminated.
+make: *** [Aufgabe 1/mailbox.o] Fehler 1
+
+21:58:42 Build Finished (took 271ms)
+

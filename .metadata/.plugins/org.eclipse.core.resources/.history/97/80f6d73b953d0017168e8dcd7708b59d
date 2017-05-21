@@ -1,0 +1,8 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+USER_OBJS := /home/mrt/Desktop/Echtzeit-Coernel-LukesZweig/diagramm/Debug/diagram.o
+
+LIBS := -lSDL -lSDL_gfx -lrt -lpthread
+

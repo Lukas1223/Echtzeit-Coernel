@@ -1,6 +1,6 @@
-21:09:54 **** Incremental Build of configuration Debug for project art2-v1 ****
+19:23:22 **** Incremental Build of configuration Debug for project art2-v1 ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
 
-21:09:54 Build Finished (took 80ms)
+19:23:23 Build Finished (took 66ms)
 

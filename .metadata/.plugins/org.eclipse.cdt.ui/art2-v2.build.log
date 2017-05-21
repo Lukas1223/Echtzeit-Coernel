@@ -1,4 +1,22 @@
+21:55:27 **** Incremental Build of configuration Debug for project art2-v2 ****
+make all 
+Building file: ../mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
+../mailbox.cpp:43:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
+                 ^
+../mailbox.cpp: In function ‘void* Grafik(void*)’:
+../mailbox.cpp:303:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Finished building: ../mailbox.cpp
+ 
+Building target: art2-v2
+Invoking: GCC C++ Linker
+g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v2"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: art2-v2
+ 
 
-**** Build of configuration Debug for project art2-v2 ****
+21:55:28 Build Finished (took 723ms)
 
-Nothing to build for project art2-v2

@@ -341,9 +341,9 @@ int main() {
 	} argument_C;
 
 	// Initialisiere erzeugerPufferSemaphoren fuer den Erzeugerpuffer
-	sem_init(&erzeugerPufferSemaphore, 0, erzeugerA_puffer);
+	//sem_init(&erzeugerPufferSemaphore, 0, erzeugerA_puffer);
 	sem_init(&erzeugerPufferSemaphore, 0, erzeugerB_puffer);
-	sem_init(&erzeugerPufferSemaphore, 0, erzeugerC_puffer);
+	//sem_init(&erzeugerPufferSemaphore, 0, erzeugerC_puffer);
 
 	// Die mailbox soll bis zu 10 Elemente vom Typ Event aufnehmen können 
 	struct mq_attr attr;
