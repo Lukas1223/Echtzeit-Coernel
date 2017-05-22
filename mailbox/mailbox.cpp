@@ -21,14 +21,34 @@
 #include "errors.h"        	// errno_abort
 #include "util.h"			// Hilfsfunktionen
 /* Simulationsparameter */
-const int erzeuger_dauer_sec = 1; // Dauer Teileerzeugung in sec
-const int erzeuger_dauer_nsec = 0; // + Dauer Teileerzeugung in nsec
-const int erzeuger_puffer = 10; // Puffergröße für Teileerzeugung
-const int verbraucher_dauer_sec = 1; // Dauer Verpackung in sec
+const int erzeugerA_dauer_sec = 2; // Dauer Teileerzeugung in sec
+const int erzeugerA_dauer_nsec = 0; // + Dauer Teileerzeugung in nsec
+
+const int erzeugerB_dauer_sec = 5;
+const int erzeugerB_dauer_nsec = 0;
+
+const int erzeugerC_dauer_sec = 7;
+const int erzeugerC_dauer_nsec = 0;
+
+int erzeuger_dauer_sec[3];
+int erzeuger_dauer_nsec[3];
+
+const int semPuffer = 1; // Puffergröße für Teileerzeugung
+const int maxPufferA = 5;
+const int maxPufferB = 3;
+const int maxPufferC = 2;
+
+const int verbraucher_dauer_sec = 3; // Dauer Verpackung in sec
 const int verbraucher_dauer_nsec = 0; // + Dauer Verpackung in nsec
 
 /* Task Variablen */
-pthread_t erzeugerTask; // Erzeugertask
+pthread_t erzeugerTaskA; // Erzeugertask
+
+pthread_t erzeugerTaskB;
+pthread_t erzeugerTaskC;
+
+pthread_t erzeugerTask[3];
+
 sem_t erzeugerPufferSemaphore; // Produktzwischenpuffer als erzeugerPufferSemaphore
 pthread_t verbraucherTask; // Verbrauchertask
 
@@ -39,14 +59,16 @@ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
 /* Parametrierung der Oberfläche */
 SDL_Surface *screen; //Window-Handler
 #define XMIN 	-10
-#define XMAX    200
+#define XMAX    300
 #define XSCALE 	 20
 #define YMIN  	 -5
 #define YMAX 	 50
 #define YSCALE 	  5
 
 /* Eine Klasse für zeitbasierte Ereignisse */
-enum eventType {Produziert, Verpackt, Undefiniert};
+enum eventType {
+	ProduziertA, ProduziertB, ProduziertC, Verpackt, Undefiniert
+};
 class Event {
 	static timeval base; // Startzeit
 
@@ -55,16 +77,16 @@ class Event {
 public:
 	// Konstruktor für ein undefiniertes Ereignis
 	Event() :
-		timestamp(mygettimeofday()), type(Undefiniert) {
+			timestamp(mygettimeofday()), type(Undefiniert) {
 	}
 	// Konstruktor für ein typisiertes Ereignis
 	Event(eventType eArg) :
-		timestamp(mygettimeofday()), type(eArg) {
+			timestamp(mygettimeofday()), type(eArg) {
 	}
 	// lese relative Zeit seit Start in msec */
 	int getRTmsec() const {
-		return (timestamp.tv_sec - base.tv_sec ) * 1000 + (timestamp.tv_usec
-				- base.tv_usec + 500 ) / 1000;
+		return (timestamp.tv_sec - base.tv_sec) * 1000
+				+ (timestamp.tv_usec - base.tv_usec + 500) / 1000;
 	}
 	// lese Ereignistyp aus
 	eventType getType() const {
@@ -92,14 +114,26 @@ struct timeval Event::base = mygettimeofday();
 void cleanup() {
 	if (&erzeugerPufferSemaphore != NULL)
 		sem_destroy(&erzeugerPufferSemaphore);
-	if (&erzeugerTask != NULL)
-		pthread_cancel(erzeugerTask);
+	if (&erzeugerTaskA != NULL)
+		pthread_cancel(erzeugerTaskA);
+	if (&erzeugerTaskB != NULL)
+		pthread_cancel(erzeugerTaskB);
+	if (&erzeugerTaskC != NULL)
+		pthread_cancel(erzeugerTaskC);
 	if (&verbraucherTask != NULL)
 		pthread_cancel(verbraucherTask);
 	if (&grafikMailbox != NULL) {
 		mq_close(grafikMailbox);
 		mq_unlink(gMbName);
 	}
+}
+
+void* Produzieren(void* arg) {
+	sem_wait(&erzeugerPufferSemaphore);
+	int puffer = *(int*) arg;
+	puffer--;
+	*(int*) arg = puffer;
+	return NULL;
 }
 
 /* function Erzeuger
@@ -109,18 +143,59 @@ void cleanup() {
  * 
  * Diese Funktion wird im Erzeugertask abgearbeitet
  */
-void * Erzeuger(void *arg) {
-	struct timespec delay = *(struct timespec *)arg;
+void * ErzeugerA(void *arg) {
+	struct timespec delay = *(struct timespec *) arg;
+	int momPuffer = 0;	//momentane Auslastung des Puffers
+	pthread_t produzierTaskA;
 	mqd_t mbG = mq_open(gMbName, O_RDWR);
 
 	for (;;) {
-		//Produktionsdauer abwarten
-		guarded_nanosleep(delay);
-		// std::cout << "part produced..." << std::endl << std::flush;
-		// Erzeugungsmeldung an Grafik senden
-		mq_send(mbG, (char *) new Event(Produziert), sizeof(Event), 1);
-		// Produkt in Puffer schieben wenn Platz frei, sonst warten
-		sem_wait(&erzeugerPufferSemaphore);
+		if (momPuffer <= maxPufferA) {
+			guarded_nanosleep(delay);
+			std::cout << "part produced A..." << std::endl << std::flush;
+			mq_send(mbG, (char *) new Event(ProduziertA), sizeof(Event), 1);
+			momPuffer++;
+			pthread_create(&produzierTaskA, NULL, Produzieren,
+					(void *) &momPuffer);
+		}
+	}
+	return NULL;
+}
+
+void * ErzeugerB(void *arg) {
+	struct timespec delay = *(struct timespec *) arg;
+	int momPuffer = 0;	//momentane Auslastung des Puffers
+	pthread_t produzierTaskB;
+	mqd_t mbG = mq_open(gMbName, O_RDWR);
+
+	for (;;) {
+		if (momPuffer < maxPufferB) {
+			guarded_nanosleep(delay);
+			std::cout << "part produced B..." << std::endl << std::flush;
+			mq_send(mbG, (char *) new Event(ProduziertB), sizeof(Event), 1);
+			momPuffer++;
+			pthread_create(&produzierTaskB, NULL, Produzieren,
+					(void *) &momPuffer);
+		}
+	}
+	return NULL;
+}
+
+void * ErzeugerC(void *arg) {
+	struct timespec delay = *(struct timespec *) arg;
+	int momPuffer = 0;	//momentane Auslastung des Puffers
+	pthread_t produzierTaskC;
+	mqd_t mbG = mq_open(gMbName, O_RDWR);
+
+	for (;;) {
+		if (momPuffer < maxPufferC) {
+			guarded_nanosleep(delay);
+			std::cout << "part produced C..." << std::endl << std::flush;
+			mq_send(mbG, (char *) new Event(ProduziertC), sizeof(Event), 1);
+			momPuffer++;
+			pthread_create(&produzierTaskC, NULL, Produzieren,
+					(void *) &momPuffer);
+		}
 	}
 	return NULL;
 }
@@ -133,19 +208,19 @@ void * Erzeuger(void *arg) {
  * Diese Funktion wird in der Verbrauchertask ausgeführt
  */
 void * Verbraucher(void *arg) {
-	struct timespec delay = *(struct timespec *)arg;
+	struct timespec delay = *(struct timespec *) arg;
 	mqd_t mbG = mq_open(gMbName, O_RDWR);
 
 	while (1) {
 		int sval;
 		// Teste, ob es etwas zum Verpacken gibt 
 		sem_getvalue(&erzeugerPufferSemaphore, &sval);
-		if (sval != erzeuger_puffer) { // Alle Plätze sind frei
-			// Hole das Teil aus dem Puffer
-			sem_post(&erzeugerPufferSemaphore);
+		if (sval != semPuffer) { // Alle Plätze sind frei
 			// und verpacke
 			guarded_nanosleep(delay);
-			// std::cout << "part wrapped..." << std::endl << std::flush;
+			// Hole das Teil aus dem Puffer
+			sem_post(&erzeugerPufferSemaphore);
+			std::cout << "part wrapped..." << std::endl << std::flush;
 			// Verpackungsmeldung an Grafik senden 
 			mq_send(mbG, (const char*) new Event(Verpackt), sizeof(Event), 1);
 		}
@@ -161,36 +236,69 @@ void * Verbraucher(void *arg) {
  * Diese Funktion wird in der Grafiktask ausgeführt
  */
 void * Grafik(void *arg) {
-	int pCounter = 0, vCounter = 0; // Zähler
+	int pCounterA = 0;
+	int pCounterB = 0;
+	int pCounterC = 0;
+	int vCounter = 0; // Zähler
 	Event evt; // Speicher für Ereignis
 	char text[256];
 	mqd_t mbG = mq_open(gMbName, O_RDWR); // Queue	
 
-	DrawDiagram(&screen, "Zeit [1/10 sec]", "Anzahl der Produkte", 
-	XMIN, XMAX, XSCALE, 
+	DrawDiagram(&screen, "Zeit [1/10 sec]", "Anzahl der Produkte",
+	XMIN, XMAX, XSCALE,
 	YMIN, YMAX, YSCALE);
 
 	while (1) {
 		if (mq_receive(mbG, (char *) &evt, sizeof(Event), NULL) != -1) {
-			// std::cout << "Received: " << evt << std::endl << std::flush;
+			//std::cout << "Received: " << evt << std::endl << std::flush;
 			switch (evt.getType()) {
-			case Produziert:
+			case ProduziertA:
 				// Zeichne Stufe für die produzierten Stücke
-				DrawLine(&screen, 0, (double)evt.getRTmsec()/100, pCounter,
+				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100, pCounterA,
 						cyan);
-				DrawLine(&screen, 0, (double)evt.getRTmsec()/100, ++pCounter,
-						cyan);
+				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100,
+						++pCounterA, cyan);
 				// Anzahl der Produkte
-				sprintf(text, "Anzahl der Produkte: %d", pCounter);
+				sprintf(text, "Anzahl der Produkte: %d", pCounterA);
 				// vorher den Bereich löschen 
 				boxRGBA(screen, 100, 40, 300, 49, 0, 0, 0, 255);
 				// Textausgabe
 				stringRGBA(screen, 100, 40, text, 0, 255, 255, 255);
 				break;
+
+			case ProduziertB:
+				// Zeichne Stufe für die produzierten Stücke
+				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, pCounterB,
+						green);
+				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100,
+						++pCounterB, green);
+				// Anzahl der Produkte
+				sprintf(text, "Anzahl der Produkte: %d", pCounterB);
+				// vorher den Bereich löschen
+				boxRGBA(screen, 100, 50, 300, 59, 0, 0, 0, 255);
+				// Textausgabe
+				stringRGBA(screen, 100, 50, text, 0, 255, 0, 255);
+				break;
+
+			case ProduziertC:
+				// Zeichne Stufe für die produzierten Stücke
+				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100, pCounterC,
+						blue);
+				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100,
+						++pCounterC, blue);
+				// Anzahl der Produkte
+				sprintf(text, "Anzahl der Produkte: %d", pCounterC);
+				// vorher den Bereich löschen
+				boxRGBA(screen, 100, 60, 300, 69, 0, 0, 0, 255);
+				// Textausgabe
+				stringRGBA(screen, 100, 60, text, 0, 0, 255, 255);
+				break;
+
 			case Verpackt:
 				// Zeichne Stufe für die verpackten Stücke
-				DrawLine(&screen, 1, (double)evt.getRTmsec()/100, vCounter, red);
-				DrawLine(&screen, 1, (double)evt.getRTmsec()/100, ++vCounter,
+				DrawLine(&screen, 1, (double) evt.getRTmsec() / 100, vCounter,
+						red);
+				DrawLine(&screen, 1, (double) evt.getRTmsec() / 100, ++vCounter,
 						red);
 				sprintf(text, "Anzahl der Verpackungen: %d", vCounter);
 				boxRGBA(screen, 100, 70, 330, 79, 0, 0, 0, 255);
@@ -198,19 +306,25 @@ void * Grafik(void *arg) {
 				break;
 			case Undefiniert:
 				// Zeichne Linie weiter
-				DrawLine(&screen, 0, (double)evt.getRTmsec()/100, pCounter,
+				DrawLine(&screen, 0, (double) evt.getRTmsec() / 100, pCounterA,
 						cyan);
-				DrawLine(&screen, 1, (double)evt.getRTmsec()/100, vCounter, red);
+				DrawLine(&screen, 2, (double) evt.getRTmsec() / 100, pCounterB,
+						green);
+				DrawLine(&screen, 3, (double) evt.getRTmsec() / 100, pCounterC,
+						blue);
+				DrawLine(&screen, 1, (double) evt.getRTmsec() / 100, vCounter,
+						red);
 				break;
 			default:
 				break;
 			}
 			SDL_UpdateRect(screen, 0, 0, 0, 0);
 		} else {
-			std::cout << "Received: " << strerror(errno) << std::endl
-					<< std::flush;
+			//std::cout << "Received: " << strerror(errno) << std::endl
+			//		<< std::flush;
 		}
 	}
+	return NULL;
 }
 
 /* function main
@@ -223,15 +337,22 @@ int main() {
 	InitScreen(&screen, "Erzeuger - Verbraucher");
 
 	// Initialisiere Zeiten der Tasks
-	struct timespec tsErzeuger;
-	tsErzeuger.tv_sec = erzeuger_dauer_sec;
-	tsErzeuger.tv_nsec = erzeuger_dauer_nsec;
+	struct timespec tsErzeugerA;
+	tsErzeugerA.tv_sec = erzeugerA_dauer_sec;
+	tsErzeugerA.tv_nsec = erzeugerA_dauer_nsec;
+	struct timespec tsErzeugerB;
+	tsErzeugerB.tv_sec = erzeugerB_dauer_sec;
+	tsErzeugerB.tv_nsec = erzeugerB_dauer_nsec;
+	struct timespec tsErzeugerC;
+	tsErzeugerC.tv_sec = erzeugerC_dauer_sec;
+	tsErzeugerC.tv_nsec = erzeugerC_dauer_nsec;
+
 	struct timespec tsVerbraucher;
 	tsVerbraucher.tv_sec = verbraucher_dauer_sec;
 	tsVerbraucher.tv_nsec = verbraucher_dauer_nsec;
 
 	// Initialisiere erzeugerPufferSemaphoren fuer den Erzeugerpuffer
-	sem_init( &erzeugerPufferSemaphore, 0, erzeuger_puffer);
+	sem_init(&erzeugerPufferSemaphore, 0, semPuffer);
 
 	// Die mailbox soll bis zu 10 Elemente vom Typ Event aufnehmen können 
 	struct mq_attr attr;
@@ -240,12 +361,16 @@ int main() {
 	attr.mq_flags = 0;
 
 	// Mailbox anlegen
-	grafikMailbox = mq_open(gMbName, O_RDWR|O_CREAT, 0600, &attr);
+	grafikMailbox = mq_open(gMbName, O_RDWR | O_CREAT, 0600, &attr);
 
 	// Tasks anlegen und starten
-	pthread_create( &erzeugerTask, NULL, Erzeuger, (void *) &tsErzeuger);
-	pthread_create( &verbraucherTask, NULL, Verbraucher, (void *) &tsVerbraucher);
-	pthread_create( &grafikTask, NULL, Grafik, NULL);
+	pthread_create(&erzeugerTaskA, NULL, ErzeugerA, (void *) &tsErzeugerA);
+	pthread_create(&erzeugerTaskB, NULL, ErzeugerB, (void *) &tsErzeugerB);
+	pthread_create(&erzeugerTaskC, NULL, ErzeugerC, (void *) &tsErzeugerC);
+
+	pthread_create(&verbraucherTask, NULL, Verbraucher,
+			(void *) &tsVerbraucher);
+	pthread_create(&grafikTask, NULL, Grafik, NULL);
 
 	// Warte auf Ereignis
 	SDL_Event event;
@@ -254,7 +379,7 @@ int main() {
 	tvPollEvent.tv_nsec = 100000000;
 	while (1) {
 		// anliegende SDL-Ereignisse verarbeiten
-		while (SDL_PollEvent(&event) ) {
+		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
 			case SDL_MOUSEBUTTONDOWN: //Mausdruck
 			case SDL_KEYDOWN: //Tastendruck
@@ -267,7 +392,8 @@ int main() {
 			}
 		}
 		// Schicke für einen glatten Eindruck ein "Undefiniert" Ereignis an die Grafik
-		mq_send(grafikMailbox, (char *) new Event(Undefiniert), sizeof(Event), 1);
+		mq_send(grafikMailbox, (char *) new Event(Undefiniert), sizeof(Event),
+				1);
 		nanosleep(&tvPollEvent, NULL);
 	}
 	// Aufräumen

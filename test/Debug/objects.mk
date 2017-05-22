@@ -2,7 +2,7 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-USER_OBJS := /home/mrt/Desktop/Workspace_Echtzeitsimulation/diagramm/Debug/diagram.o
+USER_OBJS :=
 
-LIBS := -lSDL -lSDL_gfx -lrt -lpthread
+LIBS :=
 
