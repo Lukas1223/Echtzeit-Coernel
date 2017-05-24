@@ -1,6 +1,22 @@
-21:00:18 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
+21:13:33 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
 make all 
-make: Für das Ziel »all« ist nichts zu tun.
+Building file: ../mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
+../mailbox.cpp:48:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
+                 ^
+../mailbox.cpp: In function ‘void* Grafik(void*)’:
+../mailbox.cpp:370:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Finished building: ../mailbox.cpp
+ 
+Building target: mailbox
+Invoking: GCC C++ Linker
+g++  -o "mailbox"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: mailbox
+ 
 
-21:00:18 Build Finished (took 101ms)
+21:13:33 Build Finished (took 747ms)
 

@@ -226,7 +226,7 @@ void * Verbraucher(void *arg) {
 		sem_getvalue(&erzeuger_CPuffer, &svalC);
 
 		//Problem: noch wird Produzent A favorisiert beim verpacken...
-		//aber unterscheidung der verpackten Produkte müsste so funktionieren..
+		// aber unterscheidung der verpackten Produkte müsste so funktionieren..
 
 		if (svalA != erzeugerA_puffer) { // Alle Plätze sind frei
 			// Hole das Teil aus dem Puffer
