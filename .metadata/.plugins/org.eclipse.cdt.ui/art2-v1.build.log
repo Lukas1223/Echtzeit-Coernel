@@ -1,4 +1,4 @@
-15:23:47 **** Incremental Build of configuration Debug for project art2-v1 ****
+16:04:31 **** Incremental Build of configuration Debug for project art2-v1 ****
 make all 
 Building target: art2-v1
 Invoking: GCC C++ Linker
@@ -6,5 +6,5 @@ g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagr
 Finished building target: art2-v1
  
 
-15:23:47 Build Finished (took 299ms)
+16:04:31 Build Finished (took 228ms)
 

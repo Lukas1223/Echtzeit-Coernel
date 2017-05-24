@@ -1,0 +1,13 @@
+15:38:08 **** Incremental Build of configuration Debug for project Aufgabe 2 ****
+make all 
+Building file: ../Aufgabe 2 v2/mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Aufgabe 2 v2/mailbox.d" -MT"Aufgabe\ 2\ v2/mailbox.d" -o "Aufgabe 2 v2/mailbox.o" "../Aufgabe 2 v2/mailbox.cpp"
+../Aufgabe 2 v2/mailbox.cpp:20:38: fatal error: diagram.h: Datei oder Verzeichnis nicht gefunden
+ #include "diagram.h"  // SDL, Draw...
+                                      ^
+compilation terminated.
+make: *** [Aufgabe 2 v2/mailbox.o] Fehler 1
+
+15:38:08 Build Finished (took 165ms)
+

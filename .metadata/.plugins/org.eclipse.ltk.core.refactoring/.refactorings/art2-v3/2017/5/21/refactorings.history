@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;art2-v3/src/mailbox_3.cpp&apos; to &apos;aufgabe3.cpp&apos;" description="Rename resource &apos;mailbox_3.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/mailbox_3.cpp" name="aufgabe3.cpp" stamp="1495632761349" updateReferences="true"/>
+</session>

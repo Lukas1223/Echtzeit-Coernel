@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="pthread" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
 	<item value="false" key="LexicalSortingAction.sort"/>
 	<section name="org.eclipse.cdt.internal.ui.text.QuickOutline">
 		<item value="false" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_USE_PERSISTED_BOUNDS"/>

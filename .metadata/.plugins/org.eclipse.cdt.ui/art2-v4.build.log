@@ -1,4 +1,7 @@
+16:04:29 **** Incremental Build of configuration Debug for project art2-v4 ****
+make all 
+make: *** Keine Regel vorhanden, um das Target »aufgabe4.o«, 
+  benötigt von »art2-v4«, zu erstellen.  Schluss.
 
-**** Build of configuration Debug for project art2-v4 ****
+16:04:29 Build Finished (took 74ms)
 
-Nothing to build for project art2-v4

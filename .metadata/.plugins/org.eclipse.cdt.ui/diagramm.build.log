@@ -1,6 +1,6 @@
-15:23:53 **** Incremental Build of configuration Debug for project diagramm ****
+16:06:32 **** Incremental Build of configuration Debug for project diagramm ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
 
-15:23:53 Build Finished (took 88ms)
+16:06:33 Build Finished (took 81ms)
 
