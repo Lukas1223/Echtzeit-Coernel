@@ -23,6 +23,5 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Aufgabe\ 1/Debug \
 Aufgabe\ 1 \
 

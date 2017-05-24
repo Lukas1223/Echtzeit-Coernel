@@ -1,6 +1,10 @@
-19:23:22 **** Incremental Build of configuration Debug for project art2-v1 ****
+15:23:47 **** Incremental Build of configuration Debug for project art2-v1 ****
 make all 
-make: Für das Ziel »all« ist nichts zu tun.
+Building target: art2-v1
+Invoking: GCC C++ Linker
+g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v1"  ./Aufgabe\ 1/mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: art2-v1
+ 
 
-19:23:23 Build Finished (took 66ms)
+15:23:47 Build Finished (took 299ms)
 

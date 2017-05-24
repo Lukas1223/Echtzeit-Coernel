@@ -1,15 +1,6 @@
-21:06:36 **** Build of configuration Debug for project sematimer ****
+15:23:49 **** Incremental Build of configuration Debug for project sematimer ****
 make all 
-Building file: ../sematimer.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"sematimer.d" -MT"sematimer.o" -o "sematimer.o" "../sematimer.cpp"
-Finished building: ../sematimer.cpp
- 
-Building target: sematimer
-Invoking: GCC C++ Linker
-g++  -o "sematimer"  ./sematimer.o   -lpthread -lrt
-Finished building target: sematimer
- 
+make: Für das Ziel »all« ist nichts zu tun.
 
-21:06:36 Build Finished (took 310ms)
+15:23:49 Build Finished (took 72ms)
 

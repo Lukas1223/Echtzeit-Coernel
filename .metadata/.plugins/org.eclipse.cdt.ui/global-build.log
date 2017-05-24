@@ -1,16 +1,78 @@
-20:57:26 **** Incremental Build of configuration Debug for project diagramm ****
+15:22:41 **** Incremental Build of configuration Debug for project diagramm ****
+make all 
+Building file: ../diagram.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"diagram.d" -MT"diagram.o" -o "diagram.o" "../diagram.cpp"
+Finished building: ../diagram.cpp
+ 
+Building file: ../testdiagramm.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"testdiagramm.d" -MT"testdiagramm.o" -o "testdiagramm.o" "../testdiagramm.cpp"
+Finished building: ../testdiagramm.cpp
+ 
+Building target: diagramm
+Invoking: GCC C++ Linker
+g++  -o "diagramm"  ./diagram.o ./testdiagramm.o   -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: diagramm
+ 
+15:22:42 **** Build of configuration Debug for project art2-v1 ****
+make all 
+Building file: ../Aufgabe 1/mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Aufgabe 1/mailbox.d" -MT"Aufgabe\ 1/mailbox.d" -o "Aufgabe 1/mailbox.o" "../Aufgabe 1/mailbox.cpp"
+../Aufgabe 1/mailbox.cpp:43:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
+                 ^
+../Aufgabe 1/mailbox.cpp: In function ‘void* Grafik(void*)’:
+../Aufgabe 1/mailbox.cpp:303:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Finished building: ../Aufgabe 1/mailbox.cpp
+ 
+Building target: art2-v1
+Invoking: GCC C++ Linker
+g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v1"  ./Aufgabe\ 1/mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: art2-v1
+ 
+15:22:45 **** Incremental Build of configuration Debug for project diagramm ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
-20:57:27 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
+
+**** Build of configuration Debug for project art2-v4 ****
+
+Nothing to build for project art2-v4
+15:22:46 **** Build of configuration Debug for project art2-v2 ****
 make all 
 Building file: ../mailbox.cpp
 Invoking: GCC C++ Compiler
 g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
-../mailbox.cpp:48:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../mailbox.cpp:43:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
  char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
                  ^
 ../mailbox.cpp: In function ‘void* Grafik(void*)’:
-../mailbox.cpp:366:1: warning: no return statement in function returning non-void [-Wreturn-type]
+../mailbox.cpp:303:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Finished building: ../mailbox.cpp
+ 
+Building target: art2-v2
+Invoking: GCC C++ Linker
+g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v2"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: art2-v2
+ 
+15:22:47 **** Incremental Build of configuration Debug for project art2-v1 ****
+make all 
+make: Für das Ziel »all« ist nichts zu tun.
+15:22:47 **** Build of configuration Debug for project mailbox ****
+make all 
+Building file: ../mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
+../mailbox.cpp:37:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
+                 ^
+../mailbox.cpp: In function ‘void* Grafik(void*)’:
+../mailbox.cpp:214:1: warning: no return statement in function returning non-void [-Wreturn-type]
  }
  ^
 Finished building: ../mailbox.cpp
@@ -20,43 +82,93 @@ Invoking: GCC C++ Linker
 g++  -o "mailbox"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
 Finished building target: mailbox
  
-20:57:31 **** Incremental Build of configuration Debug for project diagramm ****
+15:22:48 **** Build of configuration Debug for project semaphore ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
-20:57:31 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
+15:22:49 **** Build of configuration Debug for project sematimer ****
+make all 
+Building target: sematimer
+Invoking: GCC C++ Linker
+g++  -o "sematimer"  ./sematimer.o   -lpthread -lrt
+Finished building target: sematimer
+ 
+15:22:49 **** Build of configuration Debug for project thread ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
-20:59:23 **** Incremental Build of configuration Debug for project diagramm ****
+15:22:50 **** Build of configuration Debug for project timer ****
+make all 
+Building target: timer
+Invoking: GCC C++ Linker
+g++  -o "timer"  ./timer.o   -lpthread -lrt
+Finished building target: timer
+ 
+
+**** Build of configuration Debug for project xyz ****
+
+Nothing to build for project xyz
+15:22:56 **** Incremental Build of configuration Debug for project diagramm ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
-20:59:23 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
+15:22:56 **** Incremental Build of configuration Debug for project art2-v1 ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
-20:59:59 **** Incremental Build of configuration Debug for project diagramm ****
+15:23:45 **** Incremental Build of configuration Debug for project diagramm ****
 make all 
-make: Für das Ziel »all« ist nichts zu tun.
-21:00:00 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
-make all 
-make: Für das Ziel »all« ist nichts zu tun.
-21:00:17 **** Incremental Build of configuration Debug for project diagramm ****
-make all 
-make: Für das Ziel »all« ist nichts zu tun.
-21:00:18 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
-make all 
-make: Für das Ziel »all« ist nichts zu tun.
-21:13:32 **** Incremental Build of configuration Debug for project diagramm ****
-make all 
-make: Für das Ziel »all« ist nichts zu tun.
-21:13:33 **** Incremental Build of configuration Debug for project Aufgabe 1 ****
+Building file: ../diagram.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"diagram.d" -MT"diagram.o" -o "diagram.o" "../diagram.cpp"
+Finished building: ../diagram.cpp
+ 
+Building file: ../testdiagramm.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"testdiagramm.d" -MT"testdiagramm.o" -o "testdiagramm.o" "../testdiagramm.cpp"
+Finished building: ../testdiagramm.cpp
+ 
+Building target: diagramm
+Invoking: GCC C++ Linker
+g++  -o "diagramm"  ./diagram.o ./testdiagramm.o   -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: diagramm
+ 
+
+**** Build of configuration Debug for project art2-v4 ****
+
+Nothing to build for project art2-v4
+15:23:46 **** Incremental Build of configuration Debug for project art2-v2 ****
 make all 
 Building file: ../mailbox.cpp
 Invoking: GCC C++ Compiler
 g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
-../mailbox.cpp:48:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../mailbox.cpp:43:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
  char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
                  ^
 ../mailbox.cpp: In function ‘void* Grafik(void*)’:
-../mailbox.cpp:370:1: warning: no return statement in function returning non-void [-Wreturn-type]
+../mailbox.cpp:303:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Finished building: ../mailbox.cpp
+ 
+Building target: art2-v2
+Invoking: GCC C++ Linker
+g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v2"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: art2-v2
+ 
+15:23:47 **** Incremental Build of configuration Debug for project art2-v1 ****
+make all 
+Building target: art2-v1
+Invoking: GCC C++ Linker
+g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v1"  ./Aufgabe\ 1/mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: art2-v1
+ 
+15:23:48 **** Incremental Build of configuration Debug for project mailbox ****
+make all 
+Building file: ../mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
+../mailbox.cpp:37:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
+                 ^
+../mailbox.cpp: In function ‘void* Grafik(void*)’:
+../mailbox.cpp:214:1: warning: no return statement in function returning non-void [-Wreturn-type]
  }
  ^
 Finished building: ../mailbox.cpp
@@ -66,3 +178,22 @@ Invoking: GCC C++ Linker
 g++  -o "mailbox"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
 Finished building target: mailbox
  
+15:23:49 **** Incremental Build of configuration Debug for project semaphore ****
+make all 
+make: Für das Ziel »all« ist nichts zu tun.
+15:23:49 **** Incremental Build of configuration Debug for project sematimer ****
+make all 
+make: Für das Ziel »all« ist nichts zu tun.
+15:23:49 **** Incremental Build of configuration Debug for project thread ****
+make all 
+make: Für das Ziel »all« ist nichts zu tun.
+15:23:50 **** Incremental Build of configuration Debug for project timer ****
+make all 
+make: Für das Ziel »all« ist nichts zu tun.
+
+**** Build of configuration Debug for project xyz ****
+
+Nothing to build for project xyz
+15:23:53 **** Incremental Build of configuration Debug for project diagramm ****
+make all 
+make: Für das Ziel »all« ist nichts zu tun.

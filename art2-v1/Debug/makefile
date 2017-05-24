@@ -8,7 +8,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Aufgabe\ 1/Debug/subdir.mk
 -include Aufgabe\ 1/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -42,7 +41,7 @@ endif
 all: art2-v1
 
 dependents:
-	-cd /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug && $(MAKE) all
+	-cd /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug && $(MAKE) clean all
 
 # Tool invocations
 art2-v1: $(OBJS) $(USER_OBJS) /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagramm

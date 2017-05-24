@@ -13,8 +13,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
 
-#define WIDTH	640
-#define HEIGHT	480
+#define WIDTH	960
+#define HEIGHT	720
 
 typedef struct {
 	Uint8 red;

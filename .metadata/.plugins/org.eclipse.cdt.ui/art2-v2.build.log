@@ -1,4 +1,4 @@
-21:55:27 **** Incremental Build of configuration Debug for project art2-v2 ****
+15:23:46 **** Incremental Build of configuration Debug for project art2-v2 ****
 make all 
 Building file: ../mailbox.cpp
 Invoking: GCC C++ Compiler
@@ -18,5 +18,5 @@ g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagr
 Finished building target: art2-v2
  
 
-21:55:28 Build Finished (took 723ms)
+15:23:47 Build Finished (took 637ms)
 
