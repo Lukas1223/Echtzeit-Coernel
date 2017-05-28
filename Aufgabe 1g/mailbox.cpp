@@ -1,15 +1,6 @@
-/* program Beispiel
- * @brief Simulation eines Fertigungsprozesses, 
- * 		1 Erzeuger mit Puffer, 1 Verbraucher
- * 		Synchronisation durch Semaphore
- * 		1 Zeichenthread
- * 		Synchronisation durch mailbox
- * @author	Leon Urbas
- * @date	09.05.2008
- * @version	V0.1
- * 
- * benötigt Verweise auf Projekt diagramm
- * benötigt libpthread, librt, libSDL und libSDL_gfx
+/* Aufgabe 1
+ * Simulation eines Fertigungsprozesses mit drei Erzeugern und einem Verpacker
+ * keine Erzeugerpuffer
  */
 #include <iostream>
 #include <stdio.h>          // printf
@@ -123,8 +114,8 @@ void cleanup() {
 	}
 }
 
-void* WartenImErzeuger(void* arg) {
-	sem_wait(&gVerbraucherSemaphore);
+void* WartenImErzeuger(void* arg) {					//Funkzion durch Thread im ErzeugerX aufgerufen
+	sem_wait(&gVerbraucherSemaphore);				//
 	sem_post((sem_t*) arg);
 	return NULL;
 }
@@ -136,7 +127,7 @@ void* WartenImErzeuger(void* arg) {
  * 
  * Diese Funktion wird im Erzeugertask abgearbeitet
  */
-void * ErzeugerA(void *arg) {
+void * ErzeugerA(void *arg) {						  //mit void Pointer kann Typsicherheit von C++ umgangen werden
 	struct timespec delay = *(struct timespec *) arg; //Übergabeargument war ursprünglich vom Typ timespec, wird jetzt wieder zurück konvertiert
 	pthread_t warteTaskA; //wenn ein Produkt fertig produziert wurde, wird einer dieser Threads erstellt, der dann darauf wartet, dass das Produkt übergeben werden kann
 	mqd_t mbG = mq_open(gMbName, O_RDWR); //diese m_queue ist für die Grafik, daran haben wir nichts geändert

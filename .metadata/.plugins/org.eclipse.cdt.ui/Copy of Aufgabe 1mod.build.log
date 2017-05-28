@@ -1,0 +1,35 @@
+16:25:48 **** Incremental Build of configuration Debug for project Copy of Aufgabe 1mod ****
+make all 
+Building file: ../mailbox.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox.d" -MT"mailbox.o" -o "mailbox.o" "../mailbox.cpp"
+../mailbox.cpp:52:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+ char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
+                 ^
+../mailbox.cpp: In function ‘void* Erzeuger(void*)’:
+../mailbox.cpp:200:18: error: expected unqualified-id before ‘=’ token
+  struct timespec = Erz.timespec;
+                  ^
+../mailbox.cpp:209:21: error: ‘delay’ was not declared in this scope
+   guarded_nanosleep(delay);
+                     ^
+../mailbox.cpp:210:38: error: invalid use of ‘enum Erzeuger::type’
+   std::cout << "part produced" + Erz.type + "..." << std::endl << std::flush;
+                                      ^
+../mailbox.cpp:211:39: error: invalid use of ‘enum Erzeuger::type’
+   mq_send(mbG, (char *) new Event(Erz.type), sizeof(Event), 1);
+                                       ^
+../mailbox.cpp: In function ‘int main()’:
+../mailbox.cpp:358:12: error: invalid use of ‘struct Erzeuger::timespec’
+  ErzeugerA.timespec = tsErzeugerA;
+            ^
+../mailbox.cpp:368:12: error: invalid use of ‘struct Erzeuger::timespec’
+  ErzeugerB.timespec = tsErzeugerB;
+            ^
+../mailbox.cpp:377:12: error: invalid use of ‘struct Erzeuger::timespec’
+  ErzeugerC.timespec = tsErzeugerC;
+            ^
+make: *** [mailbox.o] Fehler 1
+
+16:25:49 Build Finished (took 479ms)
+

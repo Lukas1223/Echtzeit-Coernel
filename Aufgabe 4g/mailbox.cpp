@@ -125,6 +125,16 @@ struct semStruct {
 void cleanup() {
 	if (&gVerbraucherSemaphoreA != NULL)
 		sem_destroy(&gVerbraucherSemaphoreA);
+	if (&gErzeugerPufferSemA != NULL)
+			sem_destroy(&gErzeugerPufferSemA);
+	if (&gVerbraucherSemaphoreB != NULL)
+			sem_destroy(&gVerbraucherSemaphoreB);
+	if (gErzeugerPufferSemB != NULL)
+			sem_destroy(&gErzeugerPufferSemB);
+	if (&gVerbraucherSemaphoreC != NULL)
+			sem_destroy(&gVerbraucherSemaphoreC);
+	if (&gErzeugerPufferSemC != NULL)
+			sem_destroy(&gErzeugerPufferSemC);
 	if (&erzeugerTaskA != NULL)
 		pthread_cancel(erzeugerTaskA);
 	if (&erzeugerTaskB != NULL)

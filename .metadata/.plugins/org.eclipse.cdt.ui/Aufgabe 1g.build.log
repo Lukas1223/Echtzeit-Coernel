@@ -1,6 +1,6 @@
-16:06:33 **** Incremental Build of configuration Debug for project Aufgabe 1g ****
+21:15:05 **** Incremental Build of configuration Debug for project Aufgabe 1g ****
 make all 
 make: Für das Ziel »all« ist nichts zu tun.
 
-16:06:33 Build Finished (took 40ms)
+21:15:05 Build Finished (took 77ms)
 
