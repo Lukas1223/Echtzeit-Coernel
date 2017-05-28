@@ -138,7 +138,7 @@ int DrawDiagram(SDL_Surface **screen, const char* const xtitle,
 	for (int h = xmin; h <= xmax; h += xscale) {
 		vlineRGBA(*screen, par.xpixzero + h * par.xpixstep, 0, HEIGHT, 255, 255,
 				255, 100);
-		for (int hh =-xscale/5; hh<=xscale; hh += xscale/5){
+		for (int hh =-5; hh<=5; hh += 1){
 			double s;
 			s = h+(xmin*hh/5);
 
@@ -151,7 +151,7 @@ int DrawDiagram(SDL_Surface **screen, const char* const xtitle,
 	for (int h = ymin; h <= ymax; h += yscale) {
 		hlineRGBA(*screen, 0, WIDTH, par.ypixzero - h * par.ypixstep, 255, 255,
 				255, 100);
-		for (int hh =-5; hh<=yscale; hh += yscale/5){
+		for (int hh =-5; hh<=5; hh += 1){
 					double s;
 					s = h+(ymin*hh/5);
 
