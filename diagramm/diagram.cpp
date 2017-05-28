@@ -138,11 +138,26 @@ int DrawDiagram(SDL_Surface **screen, const char* const xtitle,
 	for (int h = xmin; h <= xmax; h += xscale) {
 		vlineRGBA(*screen, par.xpixzero + h * par.xpixstep, 0, HEIGHT, 255, 255,
 				255, 100);
+		for (int hh =-5; hh<=5; hh += 1){
+			double s;
+			s = h+(xmin*hh/5);
+
+		vlineRGBA(*screen, par.xpixzero + s  * par.xpixstep, 0, HEIGHT, 255, 255,
+						255, 25);
+		}
+
 	}
 
 	for (int h = ymin; h <= ymax; h += yscale) {
 		hlineRGBA(*screen, 0, WIDTH, par.ypixzero - h * par.ypixstep, 255, 255,
 				255, 100);
+		for (int hh =-5; hh<=5; hh += 1){
+					double s;
+					s = h+(ymin*hh/5);
+
+				hlineRGBA(*screen, 0, WIDTH, par.ypixzero - s * par.ypixstep, 255, 255,
+						255, 25);
+				}
 	}
 
 	//x-scale

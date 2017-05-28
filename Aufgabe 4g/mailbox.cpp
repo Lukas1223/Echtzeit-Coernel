@@ -126,15 +126,15 @@ void cleanup() {
 	if (&gVerbraucherSemaphoreA != NULL)
 		sem_destroy(&gVerbraucherSemaphoreA);
 	if (&gErzeugerPufferSemA != NULL)
-			sem_destroy(&gErzeugerPufferSemA);
+		sem_destroy(&gErzeugerPufferSemA);
 	if (&gVerbraucherSemaphoreB != NULL)
-			sem_destroy(&gVerbraucherSemaphoreB);
-	if (gErzeugerPufferSemB != NULL)
-			sem_destroy(&gErzeugerPufferSemB);
+		sem_destroy(&gVerbraucherSemaphoreB);
+	if (&gErzeugerPufferSemB != NULL)
+		sem_destroy(&gErzeugerPufferSemB);
 	if (&gVerbraucherSemaphoreC != NULL)
-			sem_destroy(&gVerbraucherSemaphoreC);
+		sem_destroy(&gVerbraucherSemaphoreC);
 	if (&gErzeugerPufferSemC != NULL)
-			sem_destroy(&gErzeugerPufferSemC);
+		sem_destroy(&gErzeugerPufferSemC);
 	if (&erzeugerTaskA != NULL)
 		pthread_cancel(erzeugerTaskA);
 	if (&erzeugerTaskB != NULL)
@@ -149,7 +149,9 @@ void cleanup() {
 	}
 }
 
-void* WartenImErzeuger(void* arg) {
+void* WartenImErzeuger(void* arg) {	//damit wartenimErzeuger nicht 3x geschrieben werden muss,
+									//verwenden wir hier ein struct, das individuell die entsprechenden
+									//Semaphoren anspricht, sodass A sich nur bei VerbraucherA anstellt, usw.
 	struct semStruct sems = *(struct semStruct *) arg;
 	sem_wait(sems.semVerbraucherPuffer);
 	sem_post(sems.semErzeugerPuffer);
@@ -175,7 +177,7 @@ void * ErzeugerA(void *arg) {
 	semStructA.puffer = &gMomPufferA;
 
 	for (;;) { //diese Schleife läuft unendlich lange, bzw bis der Erzeugerthread beendet wird (wenn wir das Programm schließen)
-			   //die gErzeugerPufferSemAaphore ist quasi der Puffer eines einzelnen Erzeugers, und man darf nur produzieren, wenn noch Platz in der Semaphore/im Puffer ist
+			   //die gErzeugerPufferSemaphore ist quasi der Puffer eines einzelnen Erzeugers, und man darf nur produzieren, wenn noch Platz in der Semaphore/im Puffer ist
 		sem_wait(&gErzeugerPufferSemA);
 		guarded_nanosleep(delay);	//hier vergeht die Produktionszeit
 		std::cout << "part produced A..." << std::endl << std::flush;//Ausgabe an die Konsole, dass ein Teil von A gebaut wurde

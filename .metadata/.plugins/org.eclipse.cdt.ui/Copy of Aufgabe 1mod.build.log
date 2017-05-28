@@ -1,4 +1,4 @@
-16:25:48 **** Incremental Build of configuration Debug for project Copy of Aufgabe 1mod ****
+22:00:47 **** Incremental Build of configuration Debug for project Copy of Aufgabe 1mod ****
 make all 
 Building file: ../mailbox.cpp
 Invoking: GCC C++ Compiler
@@ -31,5 +31,5 @@ g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagr
             ^
 make: *** [mailbox.o] Fehler 1
 
-16:25:49 Build Finished (took 479ms)
+22:00:48 Build Finished (took 429ms)
 

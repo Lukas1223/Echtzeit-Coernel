@@ -230,7 +230,8 @@ void * ErzeugerC(void *arg) {	//Kommentare siehe A
 	return NULL;
 }
 
-bool VerbraucherWartenTest() {
+bool VerbraucherWartenTest() {			//Wichtig: hier gibt es jetzt 3 Warteschalter, an denen jeweils di individuellen
+										//Produkte warten. Nur dann wenn alle drei warten, wird gepostet (alle drei)
 	bool ergebnis = false;
 	if (gMomPufferA > 0 and gMomPufferB > 0 and gMomPufferC > 0) {
 		ergebnis = true;

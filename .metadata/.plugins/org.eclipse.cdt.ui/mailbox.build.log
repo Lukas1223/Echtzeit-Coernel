@@ -1,6 +1,10 @@
-16:13:44 **** Incremental Build of configuration Debug for project mailbox ****
+22:00:52 **** Incremental Build of configuration Debug for project mailbox ****
 make all 
-make: Für das Ziel »all« ist nichts zu tun.
+Building target: mailbox
+Invoking: GCC C++ Linker
+g++  -o "mailbox"  ./mailbox.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
+Finished building target: mailbox
+ 
 
-16:13:45 Build Finished (took 114ms)
+22:00:52 Build Finished (took 258ms)
 

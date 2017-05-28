@@ -1,18 +1,10 @@
-21:14:54 **** Incremental Build of configuration Debug for project Aufgabe 2g ****
+22:00:50 **** Incremental Build of configuration Debug for project Aufgabe 2g ****
 make all 
-Building file: ../mailbox_2.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"mailbox_2.d" -MT"mailbox_2.o" -o "mailbox_2.o" "../mailbox_2.cpp"
-../mailbox_2.cpp:52:17: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
- char* gMbName = "/mboxG"; // Name der Mailbox für Zeichenkommandos
-                 ^
-Finished building: ../mailbox_2.cpp
- 
 Building target: art2-v1
 Invoking: GCC C++ Linker
 g++ -L"/home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm" -o "art2-v1"  ./mailbox_2.o  /home/mrt/Desktop/Workspace_Echtzeitsimulation_neu/Echtzeit-Coernel/diagramm/Debug/diagram.o -lSDL -lSDL_gfx -lrt -lpthread
 Finished building target: art2-v1
  
 
-21:14:55 Build Finished (took 548ms)
+22:00:50 Build Finished (took 299ms)
 
